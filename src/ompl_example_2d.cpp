@@ -26,6 +26,9 @@ namespace og = ompl::geometric;
 
 namespace ompl_example_2d {
 
+/// occupancy map used for planning
+nav_msgs::OccupancyGrid occupancyMap;
+
 Planner2D::Planner2D(ros::NodeHandle& _nodeHandle)
     : nodeHandle(_nodeHandle)
 {
@@ -38,7 +41,7 @@ Planner2D::~Planner2D()
 }
 
 /// check if the current state is valid
-bool Planner2D::isStateValid(const ob::State *state){
+bool isStateValid(const ob::State *state){
     // get x coord of the robot
     const auto *coordX =
             state->as<ob::CompoundState>()->as<ob::RealVectorStateSpace::StateType>(0);
@@ -56,7 +59,12 @@ bool Planner2D::isStateValid(const ob::State *state){
     //! Comment this part of the code if you'd like to use occupancy grid
 
     //! Your code goes below
-
+    // Hint: uncoment the code below:
+//    std::cout << "occupancyMap.info.origin.position " << occupancyMap.info.origin.position.x <<
+//                 ", " << occupancyMap.info.origin.position.y << "\n";
+//    std::cout << "occupancyMap.info.resolution " << occupancyMap.info.resolution << "\n";
+//    std::cout << "occupancyMap.info.width " << occupancyMap.info.width << "\n";
+//    std::cout << "occupancyMap.info.height " << occupancyMap.info.height << "\n";
     //! Your code goes above
     return true;
 }

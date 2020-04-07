@@ -62,9 +62,6 @@ private:
     /// node handle
     ros::NodeHandle& nodeHandle;
 
-    /// occupancy map used for planning
-    nav_msgs::OccupancyGrid occupancyMap;
-
     /// problem dim
     int dim;
 
@@ -88,9 +85,6 @@ private:
 
     /// configure node
     void configure(void);
-
-    /// check if the current state is valid
-    static bool isStateValid(const ompl::base::State *state);
 
     /// extract path
     nav_msgs::Path extractPath(ompl::base::ProblemDefinition* pdef);

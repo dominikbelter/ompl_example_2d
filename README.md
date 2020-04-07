@@ -7,8 +7,11 @@ $ sudo apt-get install ros-melodic-map-server ros-melodic-dwa-local-planner libo
 # Installation
 
 $ cd ~/catkin_ws/src
+
 $ git clone https://github.com/dominikbelter/ompl_example_2d
+
 $ cd ~/catkin_ws/
+
 $ catkin_make
 
 # Run example
