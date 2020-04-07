@@ -45,12 +45,19 @@ bool Planner2D::isStateValid(const ob::State *state){
     // get y coord of the robot
     const auto *coordY =
             state->as<ob::CompoundState>()->as<ob::RealVectorStateSpace::StateType>(1);
+
+    //! Comment this part of the code if you'd like to use occupancy grid
     // define the obstacle
     if (coordX->values[0]<5.1&&coordX->values[0]>5.0){
         if (coordY->values[0]<4.0&&coordY->values[0]>-5.0){
             return false;
         }
     }
+    //! Comment this part of the code if you'd like to use occupancy grid
+
+    //! Your code goes below
+
+    //! Your code goes above
     return true;
 }
 
