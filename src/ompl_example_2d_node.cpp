@@ -10,7 +10,7 @@
 #include "../include/ompl_example_2d/ompl_example_2d.hpp"
 
 #include <geometry_msgs/PoseStamped.h>
-#include <nav_msgs/Path.h>
+#include <nav_msgs/Path.h> 
 #include <nav_msgs/OccupancyGrid.h>
 
 nav_msgs::OccupancyGrid globalMap;
