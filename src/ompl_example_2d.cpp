@@ -113,7 +113,7 @@ nav_msgs::Path Planner2D::planPath(const nav_msgs::OccupancyGrid& globalMap){
     occupancyMap = globalMap;
 
     // search space information
-    auto si(std::make_shared<ob::SpaceInformation>(space));
+    auto si(std::make_shared<ompl::base::SpaceInformation>(space));
     // define state checking callback
     si->setStateValidityChecker(isStateValid);
     // set State Validity Checking Resolution (avoid going through the walls)
