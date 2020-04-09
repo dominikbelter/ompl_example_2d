@@ -87,11 +87,9 @@ add_library(${PROJECT_NAME}_library STATIC ${ompl_example_2d_sources} ${ompl_exa
 
 target_link_libraries(${PROJECT_NAME}_library
    ${catkin_LIBRARIES}
-  ompl
 )
  
 # add_dependencies(${PROJECT_NAME}_library ompl_example_2d_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
-
 
 ## Declare a cpp executable
 add_executable(
@@ -105,6 +103,8 @@ target_link_libraries(${PROJECT_NAME}_node
    ${PROJECT_NAME}_library
   ${catkin_LIBRARIES}
   ompl
+  # try to comment line above and uncomment line below if problems with linking to ompl library
+#   ${OMPL_LIBRARIES}
 )
 
 ## Declare a cpp executable
