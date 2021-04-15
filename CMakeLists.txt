@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0.2)
+
 project(ompl_example_2d)
 
 set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
@@ -20,17 +21,16 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 ## System dependencies are found with CMake's conventions
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system serialization)
 find_package(Eigen3 REQUIRED)
 
-find_package(OMPL)
+find_package(ompl)
 
-find_package(Boost REQUIRED COMPONENTS system)
 #  add_service_files(
 #    FILES
 #    RG2.srv
 # )
-generate_messages(DEPENDENCIES std_msgs sensor_msgs) 
+# generate_messages(DEPENDENCIES std_msgs sensor_msgs) 
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -103,6 +103,7 @@ target_link_libraries(${PROJECT_NAME}_node
    ${PROJECT_NAME}_library
   ${catkin_LIBRARIES}
   ompl
+  boost_serialization
   # try to comment line above and uncomment line below if problems with linking to ompl library
 #   ${OMPL_LIBRARIES}
 )
@@ -114,7 +115,7 @@ target_link_libraries(${PROJECT_NAME}_node
 # )
 
 # add_dependencies(${PROJECT_NAME}_trajectory ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(${PROJECT_NAME}_node ompl_example_2d_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_node ${catkin_EXPORTED_TARGETS})
 
 
 #############
