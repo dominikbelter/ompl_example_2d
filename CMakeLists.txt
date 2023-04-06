@@ -1,134 +1,50 @@
-cmake_minimum_required(VERSION 3.0.2)
-
+cmake_minimum_required(VERSION 3.8)
 project(ompl_example_2d)
 
-set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-## Find catkin macros and libraries
-find_package(catkin REQUIRED COMPONENTS
-    roscpp
-    message_filters
-    sensor_msgs
-    std_msgs
-    tf
-    tf_conversions
-    eigen_conversions
-#    moveit_ros_planning_interface
-#    moveit_ros_move_group
-    std_srvs
-    message_generation
-    ompl
+# find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(ompl REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+
+add_executable(ompl_example_2d_node src/ompl_example_2d_node.cpp)
+target_include_directories(ompl_example_2d_node PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+target_compile_features(ompl_example_2d_node PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+ament_target_dependencies(
+  ompl_example_2d_node
+  "ompl"
+  "nav_msgs"
+  "geometry_msgs"
 )
 
-## System dependencies are found with CMake's conventions
-find_package(Boost REQUIRED COMPONENTS system serialization)
-find_package(Eigen3 REQUIRED)
-
-find_package(ompl)
-
-#  add_service_files(
-#    FILES
-#    RG2.srv
-# )
-# generate_messages(DEPENDENCIES std_msgs sensor_msgs) 
-###################################
-## catkin specific configuration ##
-###################################
-## The catkin_package macro generates cmake config files for your package
-## Declare things to be passed to dependent projects
-## INCLUDE_DIRS: uncomment this if you package contains header files
-## LIBRARIES: libraries you create in this project that dependent projects also need
-## CATKIN_DEPENDS: catkin_packages dependent projects also need
-## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
-    INCLUDE_DIRS
-      include
-    LIBRARIES
-      ${PROJECT_NAME}_library
-    CATKIN_DEPENDS
-	    roscpp
-	    message_filters
-            sensor_msgs
-	    std_msgs
-            geometry_msgs
-	    tf
-	    tf_conversions
-	    eigen_conversions
-#            moveit_ros_planning_interface
-#            moveit_ros_move_group
-	    trajectory_msgs 
-#  DEPENDS system_lib
+# Install launch files
+install(
+  DIRECTORY launch
+  DIRECTORY maps
+  DIRECTORY param
+  DIRECTORY rviz
+  DESTINATION share/${PROJECT_NAME}
 )
 
-###########
-## Build ##
-###########
+install(TARGETS ompl_example_2d_node
+  DESTINATION lib/${PROJECT_NAME})
 
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
-include_directories(
-  ${CMAKE_SOURCE_DIR}/include
-  ${catkin_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIRS}
-  ${Eigen_INCLUDE_DIRS}
-)
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  # the following line skips the linter which checks for copyrights
+  # comment the line when a copyright and license is added to all source files
+  set(ament_cmake_copyright_FOUND TRUE)
+  # the following line skips cpplint (only works in a git repo)
+  # comment the line when this package is in a git repo and when
+  # a copyright and license is added to all source files
+  set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
 
-## Declare a cpp library
-file(GLOB ompl_example_2d_sources
-    src/ompl_example_2d.cpp
-)
-
-file(GLOB ompl_example_2d_headers
-    include/ompl_example_2d/*.hpp
-)
-
-add_library(${PROJECT_NAME}_library STATIC ${ompl_example_2d_sources} ${ompl_example_2d_headers}
-)
-
-target_link_libraries(${PROJECT_NAME}_library
-   ${catkin_LIBRARIES}
-)
- 
-# add_dependencies(${PROJECT_NAME}_library ompl_example_2d_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
-
-## Declare a cpp executable
-add_executable(
-  ${PROJECT_NAME}_node
-  src/ompl_example_2d_node.cpp
-)
-
-add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-# add_dependencies(${PROJECT_NAME} ompl_example_2d_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
-target_link_libraries(${PROJECT_NAME}_node
-   ${PROJECT_NAME}_library
-  ${catkin_LIBRARIES}
-  ompl
-  boost_serialization
-  # try to comment line above and uncomment line below if problems with linking to ompl library
-#   ${OMPL_LIBRARIES}
-)
-
-## Declare a cpp executable
-# add_executable(
-#   ${PROJECT_NAME}_trajectory_tending
-#   src/trajectoryNodeTending.cpp
-# )
-
-# add_dependencies(${PROJECT_NAME}_trajectory ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(${PROJECT_NAME}_node ${catkin_EXPORTED_TARGETS})
-
-
-#############
-## Testing ##
-#############
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-# Add gtest based cpp test target and link libraries
-#catkin_add_gtest(${PROJECT_NAME}-test
-#  test/test_elevation_mapping.cpp
-#  test/ElevationMapTest.cpp
-#  test/WeightedEmpiricalCumulativeDistributionFunctionTest.cpp
-#)
-#if(TARGET ${PROJECT_NAME}-test)
-#  target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME}_library)
-#endif()
+ament_package()

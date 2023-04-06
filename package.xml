@@ -1,27 +1,22 @@
 <?xml version="1.0"?>
-<package format="2">
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>ompl_example_2d</name>
-  <version>0.0.1</version>
-  <description>OMPL 2D example.</description>
-  <maintainer email="dominik.belter@put.poznan.pl">Dominik Belter</maintainer>
-  <license>BSD</license>
-  <url type="website">http://lrm.put.poznan.pl</url>
-  <url type="bugtracker">http://lrm.put.poznan.pl</url>
-  <author email="dominik.belter@put.poznan.pl">Dominik Belter</author>
-  <buildtool_depend>catkin</buildtool_depend>
-  <depend>roscpp</depend>
-  <depend>sensor_msgs</depend>
-  <depend>message_filters</depend>
-  <depend>geometry_msgs</depend>
-  <depend>std_msgs</depend>
-  <depend>grid_map_core</depend>
-  <depend>grid_map_ros</depend>
-  <depend>grid_map_msgs</depend>
-  <depend>tf</depend>
-  <depend>tf_conversions</depend>
-  <depend>eigen_conversions</depend>
-  <depend>moveit_ros_planning_interface</depend>
-  <depend>moveit_ros_move_group</depend>
-  <depend>trajectory_msgs</depend>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="dominik.belter@gmail.com">dominik</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
   <depend>ompl</depend>
+  <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>
