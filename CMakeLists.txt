@@ -60,6 +60,7 @@ target_include_directories(ompl_example_2d_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 target_compile_features(ompl_example_2d_node PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+target_link_libraries(ompl_example_2d_node ${PROJECT_NAME}_library ${OMPL_LIBRARIES})
 ament_target_dependencies(
   ompl_example_2d_node
   "rclcpp"

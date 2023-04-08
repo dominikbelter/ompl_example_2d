@@ -41,9 +41,8 @@ public:
 
     /*!
    * Constructor.
-   * @param nodeHandle the ROS node handle.
    */
-    Planner2D(ros::NodeHandle& _nodeHandle);
+    Planner2D(void);
 
     /*!
    * Destructor.
@@ -56,8 +55,6 @@ public:
     nav_msgs::msg::Path planPath(const nav_msgs::msg::OccupancyGrid& globalMap);
 
 private:
-    /// node handle
-    ros::NodeHandle& nodeHandle;
 
     /// problem dim
     int dim;

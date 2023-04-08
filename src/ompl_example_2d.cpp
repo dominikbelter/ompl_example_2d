@@ -9,18 +9,12 @@
 #include "ompl_example_2d/ompl_example_2d.hpp"
 #include <rclcpp/rclcpp.hpp>
 
-// Boost
-#include <boost/bind.hpp>
-#include <boost/thread/recursive_mutex.hpp>
-
 // STL
 #include <string>
 #include <math.h>
 #include <limits>
-#include <thread>
 
 using namespace std;
-using namespace ros;
 
 namespace ob = ompl::base;
 namespace og = ompl::geometric;
@@ -30,10 +24,9 @@ namespace ompl_example_2d {
 /// occupancy map used for planning
 nav_msgs::msg::OccupancyGrid occupancyMap;
 
-Planner2D::Planner2D(ros::NodeHandle& _nodeHandle)
-    : nodeHandle(_nodeHandle)
+Planner2D::Planner2D(void)
 {
-    ROS_INFO("Controlling UR node started.");
+    std::cout << "planner 2D started\n";
     configure();
 }
 
@@ -77,7 +70,7 @@ nav_msgs::msg::Path Planner2D::extractPath(ob::ProblemDefinition* pdef){
     // get the obtained path
     ob::PathPtr path = pdef->getSolutionPath();
     // print the path to screen
-    path->print(std::cout);
+    // path->print(std::cout);
     // convert to geometric path
     const auto *path_ = path.get()->as<og::PathGeometric>();
     // iterate over each position
@@ -139,6 +132,7 @@ nav_msgs::msg::Path Planner2D::planPath(const nav_msgs::msg::OccupancyGrid& glob
         // get the planned path
         plannedPath=extractPath(pdef.get());
     }
+    std::cout << "path planned\n";
     return plannedPath;
 }
 
