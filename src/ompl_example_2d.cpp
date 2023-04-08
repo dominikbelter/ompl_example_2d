@@ -97,6 +97,7 @@ nav_msgs::msg::Path Planner2D::extractPath(ob::ProblemDefinition* pdef){
         // ... and add the pose to the path
         plannedPath.poses.push_back(poseMsg);
     }
+    std::cout << "planned path size: " << plannedPath.poses.size() << "\n";
     return plannedPath;
 }
 

@@ -23,7 +23,7 @@ def generate_launch_description():
 
 
     rviz_config_dir = os.path.join(
-        get_package_share_directory('example_maps'), 'rviz', 'rviz_cfg.rviz')
+        get_package_share_directory('ompl_example_2d'), 'rviz', 'rviz_cfg.rviz')
 
     rviz_cmd = Node(
             package='rviz2',
@@ -32,11 +32,18 @@ def generate_launch_description():
             arguments=['-d', rviz_config_dir],
             parameters=[{'use_sim_time': True}],
             output='screen')
+    
+    ompl_example_cmd = Node(
+            package='ompl_example_2d',
+            executable='ompl_example_2d_node',
+            name='ompl_example_2d_node',
+            output='screen')
 
     ld = LaunchDescription()
 
     # Add the commands to the launch description
-    ld.add_action(map_server_cmd)
+    ld.add_action(ompl_example_cmd)
     ld.add_action(rviz_cmd)
+    ld.add_action(map_server_cmd)
 
     return ld

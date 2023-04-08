@@ -58,8 +58,9 @@ class PathPublisher : public rclcpp::Node
         ompl_example_2d::Planner2D planner_;
         nav_msgs::msg::Path plannedPath;
         plannedPath = planner_.planPath(globalMap);
+        message = plannedPath;
         publisher_->publish(message);
-        mapChanged = false;
+        // mapChanged = false;
         std::cout << "Path published.\n";
       }
     }
