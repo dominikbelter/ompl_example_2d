@@ -10,7 +10,6 @@
 #pragma once
 
 // ROS
-#include <ros/ros.h>
 #include "geometry_msgs/msg/pose_stamped.h"
 #include "nav_msgs/msg/path.hpp"
 #include "nav_msgs/msg/occupancy_grid.hpp"
