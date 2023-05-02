@@ -3,7 +3,6 @@
 #include <functional>
 #include <string>
 
-#include <ros/ros.h>
 #include "rclcpp/rclcpp.hpp"
 #include "nav_msgs/msg/occupancy_grid.hpp"
 #include <nav_msgs/msg/path.hpp> 

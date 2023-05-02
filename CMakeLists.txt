@@ -18,6 +18,7 @@ find_package(Eigen3 REQUIRED)
 include_directories(
   include
   /opt/ros/humble/include
+  /opt/ros/humble/include/ompl-1.6
   ${EIGEN3_INCLUDE_DIRS}
   ${colcon_INCLUDE_DIRS}
 )
