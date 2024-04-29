@@ -13,6 +13,7 @@ find_package(rclcpp REQUIRED)
 find_package(ompl REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
 
 include_directories(
@@ -46,10 +47,11 @@ target_compile_features(${PROJECT_NAME}_library PUBLIC c_std_99 cxx_std_17)  # R
 ament_target_dependencies(
   ${PROJECT_NAME}_library
   Eigen3
-  "rclcpp"
-  "ompl"
-  "nav_msgs"
-  "geometry_msgs"
+  rclcpp
+  ompl
+  nav_msgs
+  geometry_msgs
+  visualization_msgs
 )
 
 # target_link_libraries(${PROJECT_NAME}_library
@@ -64,10 +66,11 @@ target_compile_features(ompl_example_2d_node PUBLIC c_std_99 cxx_std_17)  # Requ
 target_link_libraries(ompl_example_2d_node ${PROJECT_NAME}_library ${OMPL_LIBRARIES})
 ament_target_dependencies(
   ompl_example_2d_node
-  "rclcpp"
-  "ompl"
-  "nav_msgs"
-  "geometry_msgs"
+  rclcpp
+  ompl
+  nav_msgs
+  geometry_msgs
+  visualization_msgs
 )
 
 # Install launch files
