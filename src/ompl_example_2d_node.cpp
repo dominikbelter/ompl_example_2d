@@ -45,7 +45,7 @@ class PathPublisher : public rclcpp::Node
       publisher_ = this->create_publisher<nav_msgs::msg::Path>("/planned_path", 10);
       obstacle_pub_ = this->create_publisher<visualization_msgs::msg::Marker>("/obstacle", 10);
 
-      // add a rectangular marker to visualize the obstacle
+      // add a rectangular marker to visualize the obstacle 
       obstacle_.header.frame_id = "map";
       obstacle_.type = visualization_msgs::msg::Marker::CUBE;
       obstacle_.pose.position.x = 5.05;
